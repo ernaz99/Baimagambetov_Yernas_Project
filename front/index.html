@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div align="center" style="padding-top:30px;">
+    <input type="button" class="btn btn-primary" onclick="window.location='/kzt_accounts'" value="Добавить счёт KZT" /><br> <br>
+    <input type="button" class="btn btn-warning" onclick="window.location='/usd_accounts'" value="Добавить счёт USD" /><br> <br>
+    <input type="button" class="btn btn-dark" onclick="window.location='/eur_accounts'" value="Добавить счёт EUR" />
+</div>
+
+<div class="container" style="padding-top:30px;">
+  <div class="row">
+    <div class="col" align="center">
+        {% for account in accounts %}
+
+        <div class="card text-white bg-danger mb-3" style="max-width: 24rem;">
+            <div class="card-header">Kaspi.kz</div>
+            <div class="card-body">
+                <h5
+                {% if account.2 == max_kzt and account.1 == curr_kzt %}
+                    class="card-title text-warning"
+                {% endif %}
+                {% if account.2 == max_usd and account.1 == curr_usd %}
+                    class="card-title text-warning"
+                {% endif %}
+                {% if account.2 == max_eur and account.1 == curr_eur %}
+                    class="card-title text-warning"
+                {% endif %}
+                >{{account.2}} {{account.1}}</h5>
+                <p class="card-text">{{account.0}}</p>
+            </div>
+            <div class="card-footer bg-dark">
+                 <form method = "get">
+                    <label for="your_balance" class="text-light">Введите баланс</label>
+                    <input class="form-control" id="your_balance" type="text" name="your_balance"><br>
+                     <input type="hidden" id="accId" name="accId" value="{{account.0}}">
+                    <input type="submit" value="Пополнить" class="btn btn-success">
+                </form>
+            </div>
+
+            <div class="card-footer bg-secondary">
+                 <form method = "get">
+                    <label for="toId" class="text-dark">Введите id</label>
+                    <input class="form-control" id="toId" type="text" name="toId"><br>
+                     <label for="balance" class="text-dark">Введите баланс</label>
+                    <input class="form-control" id="balance" type="text" name="balance"><br>
+                     <input type="hidden" id="fromId" name="fromId" value="{{account.0}}">
+                    <input type="submit" value="Отправить" class="btn btn-primary">
+                </form>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
